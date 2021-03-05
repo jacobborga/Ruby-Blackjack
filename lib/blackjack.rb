@@ -31,8 +31,12 @@ class BlackJack
         @dealer_cards << @deck.draw_card
     end
 
-    def hand_value
+    def player_hand_value
         return @player_cards[0].value + @player_cards[1].value
+    end
+
+    def dealer_hand_value
+        return @dealer_cards[0].value + @dealer_cards[1].value
     end
 
     def display_player_hand
@@ -45,6 +49,27 @@ class BlackJack
             puts "#{@player_cards[1]}"
             puts "Total value: #{hand_value}"
         end
+    end
+
+    def bust?
+        if dealer_hand_value > 21 || player_hand_value > 21
+            return true
+        end
+        return false
+    end
+
+    def blackjackwin?
+        if dealer_hand_value == 21 || player_hand_value == 21
+            return true
+        end 
+        return false
+    end
+
+    def canHit?
+        if !bust || !blackjackwin
+            return true
+        end
+        return false
     end
 end 
 
