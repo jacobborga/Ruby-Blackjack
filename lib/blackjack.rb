@@ -20,7 +20,7 @@ class BlackJack
         @player_cards = []
         @dealer_cards = []
         draw_hand
-        hand_value
+        player_hand_value
         display_player_hand
     end 
 
@@ -43,11 +43,11 @@ class BlackJack
         if @player_cards[0].number == "A" || @player_cards[1].number == "A"
             puts "#{@player_cards[0]}"
             puts "#{@player_cards[1]}"
-            puts "Total value: #{hand_value}/#{hand_value + 10}"
+            puts "Total value: #{player_hand_value}/#{player_hand_value + 10}"
         else
             puts "#{@player_cards[0]}"
             puts "#{@player_cards[1]}"
-            puts "Total value: #{hand_value}"
+            puts "Total value: #{player_hand_value}"
         end
     end
 
@@ -70,6 +70,17 @@ class BlackJack
             return true
         end
         return false
+    end
+
+    def hit(turn)
+        if turn == "player"
+            @player_cards << @deck.draw_card
+            display_player_hand
+        elsif turn == "dealer"
+
+        else
+            return "Please enter a valid turn (player or dealer)"
+        end
     end
 end 
 
