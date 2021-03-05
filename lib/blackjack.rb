@@ -16,8 +16,36 @@ require_relative("./deck.rb")
 
 class BlackJack 
     def initialize
-        deck = Deck.new
+        @deck = Deck.new
+        @player_cards = []
+        @dealer_cards = []
+        draw_hand
+        hand_value
+        display_player_hand
     end 
+
+    def draw_hand
+        @player_cards << @deck.draw_card
+        @dealer_cards << @deck.draw_card
+        @player_cards << @deck.draw_card
+        @dealer_cards << @deck.draw_card
+    end
+
+    def hand_value
+        return @player_cards[0].value + @player_cards[1].value
+    end
+
+    def display_player_hand
+        if @player_cards[0].number == "A" || @player_cards[1].number == "A"
+            puts "#{@player_cards[0]}"
+            puts "#{@player_cards[1]}"
+            puts "Total value: #{hand_value}/#{hand_value + 10}"
+        else
+            puts "#{@player_cards[0]}"
+            puts "#{@player_cards[1]}"
+            puts "Total value: #{hand_value}"
+        end
+    end
 end 
 
 game = BlackJack.new
